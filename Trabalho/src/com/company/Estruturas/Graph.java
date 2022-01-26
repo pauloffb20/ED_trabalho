@@ -3,10 +3,16 @@ package com.company.Estruturas;
 import java.util.Iterator;
 
 public class Graph<T> implements GraphADT<T> {
-    protected final int DEFAULT_CAPACITY = 10;
+    protected final static int DEFAULT_CAPACITY = 10;
     protected int numVertices;
     protected boolean[][] adjMatrix;
     public T[] vertices;
+
+    public Graph(){
+        this.numVertices = 0;
+        this.adjMatrix = new boolean[DEFAULT_CAPACITY][DEFAULT_CAPACITY];
+        this.vertices = (T[]) (new Object[DEFAULT_CAPACITY]);
+    }
 
     public Graph(int capacity) {
         this.numVertices = 0;
@@ -336,4 +342,10 @@ public class Graph<T> implements GraphADT<T> {
     public T getVertex(int num){
         return this.vertices[num];
     }
+
+    public T[] getVertices(){
+        return this.vertices;
+    }
+
+
 }

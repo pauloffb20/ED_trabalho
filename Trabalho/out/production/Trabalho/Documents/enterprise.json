@@ -1,0 +1,529 @@
+{
+  "vendedores": {
+    "list": [
+      {
+        "nome": "Vendedor 1",
+        "id": 1,
+        "capacidade": 250,
+        "mercados": {
+          "list": [
+            "Mercado 1",
+            "...",
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      {
+        "nome": "Vendedor 2",
+        "id": 2,
+        "capacidade": 200,
+        "mercados": {
+          "list": [
+            "...",
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      null,
+      null,
+      null
+    ]
+  },
+  "locais": {
+    "list": [
+      {
+        "local_name": "Empresa",
+        "type": "Sede",
+        "capacidade": 500,
+        "stock": 420,
+        "clientes": {
+          "list": [
+            40,
+            50,
+            25,
+            20,
+            80
+          ]
+        }
+      },
+      {
+        "local_name": "Mercado 1",
+        "type": "Mercado",
+        "capacidade": 500,
+        "stock": 420,
+        "clientes": {
+          "list": [
+            40,
+            50,
+            25,
+            20,
+            80
+          ]
+        }
+      },
+      {
+        "local_name": "Armazém 1",
+        "type": "Armazém",
+        "capacidade": 500,
+        "stock": 420,
+        "clientes": {
+          "list": [
+            0,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      null,
+      null
+    ]
+  },
+  "paths": {
+    "list": [
+      {
+        "de": "Empresa",
+        "para": "Mercado 1",
+        "distancia": 30
+      },
+      {
+        "de": "Mercado 1",
+        "para": "Mercado 2",
+        "distancia": 30
+      },
+      {
+        "de": "Empresa",
+        "para": "Armazém 1",
+        "distancia": 30
+      },
+      {
+        "de": "Mercado 1",
+        "para": "Armazém 1",
+        "distancia": 30
+      },
+      null
+    ]
+  },
+  "gestor": {
+    "vendedors": {
+      "list": [
+        {
+          "nome": "Vendedor 1",
+          "id": 1,
+          "capacidade": 250,
+          "mercados": {
+            "list": [
+              "Mercado 1",
+              "...",
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "nome": "Vendedor 2",
+          "id": 2,
+          "capacidade": 200,
+          "mercados": {
+            "list": [
+              "...",
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    "locals": {
+      "list": [
+        {
+          "local_name": "Empresa",
+          "type": "Sede",
+          "capacidade": 500,
+          "stock": 420,
+          "clientes": {
+            "list": [
+              40,
+              50,
+              25,
+              20,
+              80
+            ]
+          }
+        },
+        {
+          "local_name": "Mercado 1",
+          "type": "Mercado",
+          "capacidade": 500,
+          "stock": 420,
+          "clientes": {
+            "list": [
+              40,
+              50,
+              25,
+              20,
+              80
+            ]
+          }
+        },
+        {
+          "local_name": "Armazém 1",
+          "type": "Armazém",
+          "capacidade": 500,
+          "stock": 420,
+          "clientes": {
+            "list": [
+              0,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        null,
+        null
+      ]
+    }
+  },
+  "network": {
+    "weightMatrix": [
+      [
+        0.0,
+        30.0,
+        30.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        30.0,
+        0.0,
+        30.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        30.0,
+        30.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "optimalPath": {
+      "list": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "allPaths": {
+      "list": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "pathTMP": {
+      "list": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "numVertices": 3,
+    "adjMatrix": [
+      [
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    ],
+    "vertices": [
+      {
+        "local_name": "Empresa",
+        "type": "Sede",
+        "capacidade": 500,
+        "stock": 420,
+        "clientes": {
+          "list": [
+            40,
+            50,
+            25,
+            20,
+            80
+          ]
+        }
+      },
+      {
+        "local_name": "Mercado 1",
+        "type": "Mercado",
+        "capacidade": 500,
+        "stock": 420,
+        "clientes": {
+          "list": [
+            40,
+            50,
+            25,
+            20,
+            80
+          ]
+        }
+      },
+      {
+        "local_name": "Armazém 1",
+        "type": "Armazém",
+        "capacidade": 500,
+        "stock": 420,
+        "clientes": {
+          "list": [
+            0,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  }
+}

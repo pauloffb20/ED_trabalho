@@ -8,6 +8,11 @@ public class Network<T> extends Graph<T> implements NetworkADT<T> {
     private static final int NO_PARENT = -1;
     private ArrayUnorderedList<Integer> optimalPath = new ArrayUnorderedList<>();
 
+    public Network(){
+        super();
+        this.weightMatrix = new double[DEFAULT_CAPACITY][DEFAULT_CAPACITY];
+    }
+
     public Network(int size) {
         super(size);
         this.weightMatrix = new double[size][size];
@@ -73,32 +78,6 @@ public class Network<T> extends Graph<T> implements NetworkADT<T> {
         this.weightMatrix[posv1][posv2] = weight;
         this.weightMatrix[posv2][posv1] = weight;
     }
-
-    /*
-    @Override
-    public double shortestPathWeight(T vertex1, T vertex2) throws InvalidIndexException, EmptyException {
-        int index1 = super.getIndex(vertex1);
-        int index2 = super.getIndex(vertex2);
-
-        if (!super.indexIsValid(index1) || !super.indexIsValid(index2)) {
-            throw new InvalidIndexException("Invalid Index");
-        }
-
-        Iterator<T> iterator = this.MyDijkstra(index1, index2);
-        System.out.println("shortestPathWeight");
-        int oldIndex = 0;
-        int newIndex;
-        int sum = 0;
-
-        while (iterator.hasNext()) {
-            newIndex = getIndex(iterator.next());
-            sum += this.weightMatrix[oldIndex][newIndex];
-            oldIndex = newIndex;
-        }
-
-        return sum;
-    }
-     */
 
 
     public ArrayUnorderedList<ArrayUnorderedList<Integer>> getShortestPath(T vertex1, T vertex2) {
@@ -299,4 +278,24 @@ public class Network<T> extends Graph<T> implements NetworkADT<T> {
 
         this.weightMatrix[posv1][posv2] = weight;
     }
+
+
+    public ArrayUnorderedList<Integer> getVertexAdjacencies(int index)  {
+        ArrayUnorderedList<Integer> result = new ArrayUnorderedList<Integer>();
+
+        for (int i = 0; i < this.size(); i++)
+            if (adjMatrix[index][i])
+                result.addToRear(i);
+
+        return result;
+    }
+
+    public double[][] getPaths(){
+        return weightMatrix;
+    }
+
+
+
+
+
 }

@@ -1,39 +1,62 @@
 package com.company.Classes;
 
+import com.company.Classes.Models.Local;
+import com.company.Classes.Models.Vendedor;
 import com.company.Estruturas.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Menu {
 
     private String docFileName = null;
-    private Empresa empresa = new Empresa();
-    private Gestor gestor = new Gestor(empresa.getVendedors());
+    private GestaoEmpresa gestaoEmpresa = new GestaoEmpresa();
+    private Gestor gestor = new Gestor(gestaoEmpresa.getVendedors(), gestaoEmpresa.getLocais());
+    private Writter writter;
+
 
     public Menu() { }
 
     public void run() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
         int choice = 0;
         System.out.println("Welcome!");
-        while (choice != 7) {
+        while (choice != 15) {
             choice = initialMenu();
 
             switch (choice) {
                 case 1:
                     isDocRead();
-                    empresa.readJson(docFileName);
+                    gestaoEmpresa.readJson(docFileName);
                     break;
                 case 2:
-                    System.out.println(empresa.toString());
+                    System.out.println(gestaoEmpresa.toString());
                     break;
                 case 3:
                     gestor.printSellersToShow();
                     break;
                 case 4:
-                    changeSeller();
+                    gestaoEmpresa.changeSeller();
+                    break;
+                case 5:
+                    exports();
+                    break;
+                case 6:
+                    gestaoEmpresa.addSeller();
+                    break;
+                case 7:
+                    printGraph();
+                    break;
+                case 8:
+                    gestaoEmpresa.AddOrSetStorage();
+                    break;
+                case 9:
+                    gestaoEmpresa.AddOrSetMarkets();
+                    break;
+                case 10:
+                    seeMarketsOrStorages();
                 default:
             }
         }
@@ -86,99 +109,131 @@ public class Menu {
 
             System.out.println("Choose from these choices");
             System.out.println("-------------------------\n");
-            System.out.println("1 - Import Document");
-            System.out.println("2 - View All Enterprise Info");
-            System.out.println("3 - View All sellers");
-            System.out.println("4 - Update ser");
+            System.out.println("1 - Import Document"); //funcional
+            System.out.println("2 - View All Enterprise Info"); //colocar grafo em vez de lista
+            System.out.println("3 - View All sellers"); //funcional
+            System.out.println("4 - Update user"); //funcional
+            System.out.println("5 - Exports"); //funcional mas locais , storages e markets tem de ser separados e atraves da network
+            System.out.println("6 - Add User"); // separar em armazem e mercado
+            System.out.println("7 - Print Network"); // funcional mas devo colocar de forma a por grafo
+            System.out.println("8 - Add/Set Storage"); //funcional
+            System.out.println("9 - Add/Set Market"); // funcional
+            System.out.println("10- See Markets or Storages");// funcional
 
             choice = input.next();
 
         return Integer.valueOf(choice);
     }
 
-    /*
 
-    public Integer changeUser() {
+    public void seeMarketsOrStorages(){
+        int choice;
 
+        System.out.println("Qual quer ver?");
+        System.out.println("1- Mercados");
+        System.out.println("2- Armazens");
         Scanner input = new Scanner(System.in);
-        String choice1;
+        choice = Integer.parseInt(input.next());
 
-        System.out.println("Qual utilizador quer alterar?");
-        System.out.println("-------------------------\n");
-        printSellers();
-        choice1 = input.next();
-
-        return Integer.valueOf(choice1);
-    }
-
-    public void printSellers(){
-        int number = 0;
-
-        ArrayUnorderedList<Vendedor> vendedores = empresa.getVendedors();
-
-        for (int i= 0; i < vendedores.size(); i++){
-            System.out.println(number + vendedores.getIndex(i).toString());
-            number++;
-        }
-    }
-
-    public Integer changeAtribute() {
-
-        Scanner input = new Scanner(System.in);
-        String choice1;
-
-        System.out.println("Qual atributo quer alterar?");
-        System.out.println("-------------------------\n");
-        System.out.println("1-Nome");
-        System.out.println("2-Capacidade");
-        System.out.println("3-Sair");
-        choice1 = input.next();
-
-        return Integer.valueOf(choice1);
-    }
-
-
-    public String changeName() {
-
-        Scanner input = new Scanner(System.in);
-        String choice;
-
-        System.out.println("Qual nome?");
-        choice = input.next();
-
-        return String.valueOf(choice);
-    }
-
-    public long changeCapacidade(){
-        Scanner input = new Scanner(System.in);
-        String choice;
-
-        System.out.println("Qual capacidade?");
-        choice = input.next();
-
-        return valueOf(choice);
-    }
-*/
-
-    public void changeSeller() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException, EmptyCollectionException, org.json.simple.parser.ParseException {
-
-        int sellectSeller = 0;
-        int sellectAtribut = 0;
-        sellectSeller = gestor.changeUser();
-        ArrayUnorderedList<Vendedor> vendedores = empresa.getVendedors();
-        sellectAtribut = gestor.changeAtribute();
-            switch (sellectAtribut) {
+        while (choice != 3) {
+            switch (choice) {
                 case 1:
-                    Vendedor vendedor = vendedores.getIndex(sellectSeller);
-                    String string = gestor.changeName();
-                    vendedor.setNome(string);
+                    gestaoEmpresa.printMarkets();
+                    choice = 3;
                     break;
                 case 2:
-                    Vendedor vendedor2 = vendedores.getIndex(sellectSeller);
-                    long capacidade = gestor.changeCapacidade();
-                    vendedor2.setCapacidade(capacidade);
+                    gestaoEmpresa.printStorages();
+                    choice = 3;
                     break;
                 default:
+                    return;
             }
         }
+    }
+
+    public void exports() throws IOException {
+        int choice;
+
+        System.out.println("Qual item quer exportar?");
+        System.out.println("1- Empresa");
+        System.out.println("2- User");
+        System.out.println("3-Storage");
+        Scanner input = new Scanner(System.in);
+        choice = Integer.parseInt(input.next());
+
+        while (choice != 4) {
+            switch (choice) {
+                case 1:
+                    exportEnterprise();
+                    choice = 4;
+                    break;
+                case 2:
+                    exportUser();
+                    choice = 4;
+                    break;
+                case 3:
+                    exportStorage();
+                    choice = 4;
+                    break;
+                default:
+                    return;
+            }
+        }
+    }
+
+
+    public void exportEnterprise() throws IOException {
+            Writter writter = new Writter();
+            writter.appendEnterprise(gestaoEmpresa);
+    }
+
+
+    public void exportUser() throws IOException {
+
+        int sellectStorage = 0;
+        Scanner input = new Scanner(System.in);
+        String choice;
+
+        System.out.println("Qual utilizador quer exportar?");
+        System.out.println("-------------------------\n");
+        gestor.printSellers();
+        ArrayUnorderedList<Vendedor> vendedores = gestaoEmpresa.getVendedors();
+
+        choice = input.next();
+        sellectStorage = Integer.valueOf(choice);
+        Vendedor vendedor = vendedores.getIndex(sellectStorage);
+        Writter writter = new Writter();
+        writter.appendPersonToFile(vendedor);
+    }
+
+    public void exportStorage() throws IOException {
+
+            int sellectStorage = 0;
+            Scanner input = new Scanner(System.in);
+            String choice;
+
+            System.out.println("Qual local quer exportar?");
+            System.out.println("-------------------------\n");
+            gestor.printLocals();
+            ArrayUnorderedList<Local> locals = gestaoEmpresa.getLocais();
+
+            choice = input.next();
+            sellectStorage = Integer.valueOf(choice);
+            Local local = locals.getIndex(sellectStorage);
+            Writter writter = new Writter();
+            writter.appendStorage(local);
+        }
+
+
+        public void printGraph() throws EmptyException {
+        Network<Local> network;
+        network = gestaoEmpresa.getNetwork();
+
+        Iterator<Local> i = network.iteratorBFS(0);
+        while(i.hasNext()){
+            System.out.println(i.next());
+        }
+    }
+
+
 }
